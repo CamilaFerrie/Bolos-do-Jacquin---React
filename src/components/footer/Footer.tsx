@@ -6,11 +6,11 @@ function Footer() {
     return(
     <footer>
         <div className="container footer_container">
-            <Link to="/admprodutos"><img src= {logo} alt=""/></Link> 
+            <Link to="/login"><img src= {logo} alt=""/></Link> 
             <span>© 2026 Bolos do Jacquin. A excelência da patisserie francesa.</span>
             <nav>
-                <a href="">Instagram</a>
-                <a href="">Facebook</a>
+                <a href="https://www.instagram.com" target='_blank'>Instagram</a>
+                <a href="https://www.facebook.com" target='_blank'>Facebook</a>
             </nav>
         </div>
     </footer>
