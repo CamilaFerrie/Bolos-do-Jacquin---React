@@ -1,8 +1,7 @@
 import './ListaProdutos.css';
-import leGrandChocolat from '../../assets/img/produtos/le_grand_chocolat.png';
-import estrela from '../../assets/icones/star.svg';
-import usuario from '../../assets/icones/user.svg';
-import { Link } from 'react-router-dom';
+import Card from '../../components/card/Card';
+import imgProduto from '../../assets/img/produtos/le_grand_chocolat.png'
+
 
 function ListaProdutos() {
     return(
@@ -18,13 +17,21 @@ function ListaProdutos() {
             </div>
 
             <div className="prod_cards">
-                <article className="prod_card">
+                <Card 
+                imgProduto={imgProduto} 
+                nome={'Le Grand Chocolat'} 
+                descricao={'Mousse de chocolate belga 70%, praliné de avelãs e biscuit de cacau.'} 
+                valor={185.00} 
+                quantidadeAvaliacoes={10} 
+                nota={9.5}
+                />
+                {/* <article className="prod_card">
                     <figure>
                         <img src={leGrandChocolat} alt="foto do produto"/>
                     </figure>
                     <h2>
                         <Link to="/detalheProduto">
-                            Le Grand Chocolat
+                            Le Grand Chocolatty
                         </Link>
                     </h2>
                     <p className="card_desc">Mousse de chocolate belga 70%, praliné de avelãs e biscuit de cacau.</p>
@@ -37,7 +44,7 @@ function ListaProdutos() {
                             <data value="9.5">9,5</data>
                         </span>
                     </p>
-                </article>
+                </article> */}
             </div>
         </section>
            </main>
