@@ -1,4 +1,5 @@
 export type Produto = {
+    nome: string;
     id: number;
     number: string;
     descricaoCurta: string;
