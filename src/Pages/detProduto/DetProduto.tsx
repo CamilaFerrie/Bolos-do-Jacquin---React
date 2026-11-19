@@ -1,14 +1,36 @@
 import "./DetProduto.css";
-import operaEternelle from '../../assets/img/produtos/opera_eternelle.png';
-import iconeJacquin from '../../assets/img/icon_jacquin.png';
+// import iconeJacquin from '../../assets/img/icon_jacquin.png';
 import { Link, useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Produto } from "../../types/Produto";
+import produtoService from "../../services/produtoService";
 
 function DetProduto() {
   const { id } = useParams();
   const produtoId = Number(id);
   const [produto, setProduto] = useState<Produto | null>(null);
+  const [erro, setErro] =useState("");
+
+  useEffect(() => {
+    if(!Number.isInteger(produtoId) || produtoId < 1) return;
+    produtoService.buscar(produtoId)
+    .then(item => setProduto(item))
+    .catch(() => setErro("Produto não encontrado!"));
+  }, [produtoId]);
+
+  if(!Number.isInteger(produtoId) || produtoId < 1) return (
+    <main className="container">
+      <p>Produto inválido.</p>
+    </main>
+  )
+
+  if(!produto) return (
+    <main className='container'>
+      <p>{erro || 'Carregando produto...'}</p>
+    </main>
+  )
+
+  const imagem = `http://localhost:3000/${produto.imagem}`
   
   return(
         <>
@@ -17,8 +39,8 @@ function DetProduto() {
         <section className="container container_det_prod">
         <img
         className="img_prod_web"
-        src={operaEternelle}
-        alt="foto do produto"
+        src={imagem}
+        alt={produto.nome}
         />
        <div className="box_det_prod">
        <Link className="link_voltar" to="/produtos">
@@ -26,9 +48,9 @@ function DetProduto() {
         <span>Retourner</span>
         </Link>
        <div className="info_sub_titulo">
-        <h2>Opera Éternelle</h2>
-        <hr />
-        <img className="img_prod_mobile" src={operaEternelle} alt="foto do produto" />
+        <h2>{produto.nome}</h2>
+        <hr/>
+        <img className="img_prod_mobile" src={imagem} alt={produto.nome} />
       </div>
       <p className="info_nota">
         Nota: 9.9 <span className="info_aval">(24 Avaliações)</span>
@@ -42,16 +64,21 @@ function DetProduto() {
       </p>
       <div className="info_box_valor">
         <p>
-          preço por quilo <span className="info_valor">R$ 185,00</span>
+          preço por quilo <span 
+          className="info_valor">
+            {produto.precoPorKg.toLocaleString
+            ('pt-BR', {style: 'currency',
+              currency: 'BRL' })}
+          </span>
         </p>
         <hr />
       </div>
-      <Link className="info_botao" to="https://wa.me/551142252001?text=Ol%C3%A1!%20Gostaria%20de%20encomendar%20um%20bolo." target="blank">
+      <a className="info_botao" href={`https://wa.me/551142252001?text=${encodeURIComponent(`Olá, gostaria de encomendar ${produto.nome}`)}!`} target="blank">
         encomendar agora
-      </Link>
+      </a>
     </div>
      </section>
-    <section className="container_avaliacao">
+    {/* <section className="container_avaliacao">
     <div className="container">
       <img src={iconeJacquin} alt="icone Jacquin" />
       <div className="box_h2">
@@ -116,7 +143,7 @@ function DetProduto() {
         </ul>
       </div>
     </div>
-  </section>
+  </section> */}
         </main>
         </>
     )
