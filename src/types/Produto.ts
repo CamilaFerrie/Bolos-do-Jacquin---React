@@ -9,3 +9,5 @@ export type Produto = {
     imagem: string;
     categoriasIds: number[]
 }
+
+export type ProdutoRequest = Omit<Produto, 'id'>
