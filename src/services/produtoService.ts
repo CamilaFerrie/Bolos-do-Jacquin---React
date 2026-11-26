@@ -17,7 +17,7 @@ const produtoService = {
         formulario.append('descricaoLonga', dados.descricaoLonga);
         formulario.append('precoPorKg', String(dados.precoPorKg))
         formulario.append('ativo', String(dados.ativo));
-        formulario.append('categoriasIds', JSON.stringify(dados.categoriasIds));
+        formulario.append('categoriaIds', JSON.stringify(dados.categoriaIds));
         formulario.append('Imagem', arquivo);
         const resposta = await api.post<Produto>('produtos', formulario);
         return resposta.data;

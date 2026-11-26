@@ -7,7 +7,7 @@ export type Produto = {
     precoPorKg: number;
     ativo: boolean;
     imagem: string;
-    categoriasIds: number[]
+    categoriaIds: number[]
 }
 
 export type ProdutoRequest = Omit<Produto, 'id'>

@@ -25,7 +25,7 @@ function ListaProdutos() {
 
     const visíveis = produtos.filter(produto =>
         produto.ativo &&
-        (!categoria || produto.categoriasIds.includes(categoria)) &&
+        (!categoria || produto.categoriaIds.includes(categoria)) &&
         (!busca || `${produto.nome} ${produto.descricaoCurta}` .toLocaleLowerCase('pt-BR').includes(busca))
     )
 
